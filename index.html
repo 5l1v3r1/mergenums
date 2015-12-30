@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Numbers</title>
+    <script src="number_symbol.js"></script>
+    <script src="animate.js"></script>
+    <script>
+    var perm = permutation();
+    window.addEventListener('load', function() {
+      setInterval(function() {
+        if (perm.length === 0) {
+          perm = permutation();
+        }
+        var number = perm.shift();
+        window.animate.animateTo(new NumberSymbol(NumberSymbol.SYMBOLS[number]));
+      }, 1000);
+    });
+    function permutation() {
+      var nums = [];
+      for (var i = 0; i < 10; ++i) {
+        var n;
+        do {
+          n = Math.floor(Math.random() * 10);
+        } while (nums.indexOf(n) >= 0);
+        nums.push(n);
+      }
+      return nums;
+    }
+    </script>
+  </head>
+  <body>
+    <svg viewBox="0 0 500 500" style="width: 500px; height: 500px">
+      <path id="path" stroke="black" fill="none" stroke-width="30" stroke-linejoin="round"
+            stroke-linecap="round" />
+    </svg>
+  </body>
+</html>
